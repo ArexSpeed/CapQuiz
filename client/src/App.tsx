@@ -4,6 +4,8 @@ import CategoryListPage from "./pages/categories/CategoryListPage";
 import CategoryOutlet from "./pages/categories/CategoryOutlet";
 import EditCategoryPage from "./pages/categories/EditCategoryPage";
 import MainPage from "./pages/Main";
+import ResultPage from "./pages/ResultPage";
+import UsersPage from "./pages/UsersPage";
 
 function App() {
   return (
@@ -17,6 +19,10 @@ function App() {
             <Route path=":categoryId" element={<EditCategoryPage />} />
           </Route>
         </Route>
+        <Route path="/results" element={<ResultPage />}>
+          <Route path=":user" element={<ResultPage />} />
+        </Route>
+        <Route path="/users" element={<UsersPage />} />
       </Routes>
     </BrowserRouter>
   );
