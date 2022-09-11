@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from 'react-router-dom';
 import { Nav } from "../components/Nav";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 
 export type Answers = {
   id: string;
@@ -29,6 +30,7 @@ export interface Quiz {
 const MainPage = () => {
   let navigate = useNavigate();
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
+  const { setQuiz } = useContext(UserContext)
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -43,16 +45,10 @@ const MainPage = () => {
   }, []);
 
   const selectQuiz = (category: string) => {
-    const fetchQuestion = async () => {
-      await fetch(`http://localhost:5000/quiz/${category}`, {
-        method: "GET",
-      })
-        .then((res) => res.json())
-        .then((data) => console.log(data));
-    };
-    fetchQuestion();
-    navigate("/quiz?question=1");
+    setQuiz(category)
+    navigate("/quiz");
   }
+  
   return (
     <div>
       <Nav />
