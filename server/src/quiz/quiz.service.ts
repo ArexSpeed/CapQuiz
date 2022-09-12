@@ -1,14 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, forwardRef } from '@nestjs/common';
 import { resultsData } from '../data/results.data';
 import { Results } from '../interfaces/results.interface';
 import { categories, quizData } from '../data/quiz.data';
 import { Category, Questions, Quiz } from '../interfaces/quiz.interface';
+import { CategoriesService } from 'src/categories/categories.service';
 
 @Injectable()
 export class QuizService {
   private quizzes: Quiz[] = quizData;
   private quizCategories: Category[] = categories;
   private results: Results[] = resultsData;
+
+  constructor(
+    @Inject(forwardRef(() => CategoriesService))
+    private categoriesService: CategoriesService,
+  ) {}
   getCategories(): Category[] {
     return this.quizCategories;
   }
@@ -85,6 +91,7 @@ export class QuizService {
       };
     } else {
       console.log('Create new category');
+      this.categoriesService.addCategory(categoryName);
       return {
         isNew: true,
       };

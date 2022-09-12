@@ -1,11 +1,13 @@
 // eslint-disable-next-line prettier/prettier
-import { Body, Controller, Delete, Get, Param, Patch, Post, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Param, Patch, Post, Req } from '@nestjs/common';
 import { Request } from 'express';
 import { CategoriesService } from './categories.service';
 
 @Controller('categories')
 export class CategoriesController {
-  constructor(private categoriesService: CategoriesService) {}
+  constructor(
+    @Inject(CategoriesService) private categoriesService: CategoriesService,
+  ) {}
   @Get('/')
   getAllCategories() {
     return this.categoriesService.getCategories();
