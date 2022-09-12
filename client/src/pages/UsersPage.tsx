@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Nav } from "../components/Nav";
 
 export interface Users {
   id: string;
@@ -21,11 +22,10 @@ const UsersPage = () => {
 
     fetchUsers();
   }, []);
-  return <div>
+  return <div className="container">
+    <Nav />
     {users?.map((user) => (
-      <div key={user.id}>
-        <Link to={`/results/${user.name}`}>{user.name}</Link>
-      </div>
+        <Link to={`/results/${user.name}`} key={user.id} className="userButton">{user.name}</Link>
     ))}
   </div>;
 };

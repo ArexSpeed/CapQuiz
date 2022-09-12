@@ -1,7 +1,7 @@
 import React from "react";
 
-const ResultPage = () => {
+const QuizResultPage = () => {
   return <div>ResultPage</div>;
 };
 
-export default ResultPage;
+export default QuizResultPage;

@@ -10,6 +10,8 @@ import QuizOutlet from "./pages/quiz/QuizOutlet";
 import QuizPage from "./pages/quiz/QuizPage";
 import ResultPage from "./pages/ResultPage";
 import UsersPage from "./pages/UsersPage";
+import './App.css';
+import QuizResultPage from "./pages/quiz/QuizResultPage";
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
         <Route path="/users" element={<UsersPage />} />
         <Route path="/quiz" element={<QuizOutlet />}>
           <Route index element={<QuizPage />} />
+          <Route path="result" element={<QuizResultPage />} />
           <Route path="add" element={<AddQuestionPage />} />
           <Route path="edit">
             <Route path=":quizId" element={<EditQuestionPage />} />

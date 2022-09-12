@@ -30,7 +30,7 @@ export interface Quiz {
 const MainPage = () => {
   let navigate = useNavigate();
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
-  const { setQuiz } = useContext(UserContext)
+  const { currentUser, setQuiz } = useContext(UserContext)
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -50,12 +50,12 @@ const MainPage = () => {
   }
   
   return (
-    <div>
+    <div className="container">
       <Nav />
-      Hello User List of quizzes
-      <div>
+      {currentUser ? <h2 style={{ margin: '20px' }}>Hello {currentUser}. Select your quiz.</h2> : <h2>You are not logged, please login!</h2>}
+      <div className="container">
         {quizzes?.map((quiz) => (
-          <button key={quiz.id} onClick={() => selectQuiz(quiz.category)}>{quiz.category}</button>
+          <button className="quizButton" key={quiz.id} onClick={() => selectQuiz(quiz.category)}>{quiz.category}</button>
         ))}
       </div>
     </div>

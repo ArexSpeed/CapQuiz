@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
 export type Answers = {
@@ -14,11 +14,6 @@ export type Questions = {
   answers: Answers[];
 };
 
-export type Category = {
-  id: string;
-  name: string;
-};
-
 export interface Quiz {
   id: string;
   category: string;
@@ -31,6 +26,7 @@ const QuizPage = () => {
   const [questions, setQuestions] = useState<Questions[]>([]);
   const [searchParams] = useSearchParams();
   const [qNo, setQNo] = useState(1);
+  const [selectedAnswers, setSelectedAnswers] = useState<Answers[]>([]);
 
   console.log(searchParams.get("question"));
 
@@ -50,19 +46,31 @@ const QuizPage = () => {
     console.log({ quiz });
     if (quiz) setQuestions(quiz?.questions);
   }, [quiz]);
+
+  const selectAnswer = (answer: Answers) => {
+    setSelectedAnswers((prev) => [...prev, answer])
+  }
   return (
-    <div>
-      <div>
+    <div className="container">
+      <h3 style={{ margin: '16px'}}>
         {qNo}. {questions[qNo - 1]?.question}
-      </div>
-      <div>
+      </h3>
+      <div className="answersContainer">
         {questions[qNo - 1]?.answers.map((answer) => (
-          <div>{answer.content}</div>
+          <button 
+            key={answer.id} 
+            className={`answerButton ${selectedAnswers.find((a) => a.id === answer.id) && 'selected'}`} 
+            onClick={() => selectAnswer(answer)}
+          >
+              {answer.content}
+          </button>
         ))}
       </div>
+      <div>
       <button onClick={() => setQNo((prev) => prev - 1)}>Prev</button>
-      {qNo >= 5 &&  <button>Finish</button>}
+      {qNo >= 5 &&  <Link to="/quiz/result">Finish</Link>}
       {qNo < 5 && <button onClick={() => setQNo((prev) => prev + 1)}>Next</button>}
+      </div>
     </div>
   );
 };
