@@ -12,10 +12,15 @@ export class UsersService {
     return this.users.find((user) => user.id === id);
   }
   loginUser(name: string): Users {
-    return this.users.find((user) => user.name === name);
+    const findUser = this.users.find((user) => user.name === name);
+    return {
+      id: findUser.id,
+      name: findUser.name,
+      role: findUser.role,
+    };
   }
-  getUserRole(id: string) {
-    const findUser = this.users.find((user) => user.id === id);
+  getUserRole(userName: string) {
+    const findUser = this.users.find((user) => user.name === userName);
     return {
       isAdmin: findUser.role === 'Admin',
     };

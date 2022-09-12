@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body } from '@nestjs/common';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -12,9 +12,17 @@ export class UsersController {
   getOneUser(@Param('id') userId: string) {
     return this.usersService.getOneUser(userId);
   }
-  @Get('/role/:id')
-  getUserRole(@Param('id') userId: string) {
-    return this.usersService.getUserRole(userId);
+  @Get('/login/:name')
+  signinUser(@Param('name') userName: string) {
+    return this.usersService.loginUser(userName);
+  }
+  // @Post('/login')
+  // signinUser(@Body('name') userName: string) {
+  //   return this.usersService.loginUser(userName);
+  // }
+  @Get('/role/:name')
+  getUserRole(@Param('name') userName: string) {
+    return this.usersService.getUserRole(userName);
   }
   // @Get('/login')
   // signinUser()

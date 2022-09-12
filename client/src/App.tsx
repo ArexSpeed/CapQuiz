@@ -10,8 +10,9 @@ import QuizOutlet from "./pages/quiz/QuizOutlet";
 import QuizPage from "./pages/quiz/QuizPage";
 import ResultPage from "./pages/ResultPage";
 import UsersPage from "./pages/UsersPage";
-import './App.css';
+import "./App.css";
 import QuizResultPage from "./pages/quiz/QuizResultPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
             <Route path=":categoryId" element={<EditCategoryPage />} />
           </Route>
         </Route>
-        <Route path="/results" element={<ResultPage />}>
+        <Route path="/results">
           <Route path=":user" element={<ResultPage />} />
         </Route>
         <Route path="/users" element={<UsersPage />} />
@@ -37,6 +38,7 @@ function App() {
             <Route path=":quizId" element={<EditQuestionPage />} />
           </Route>
         </Route>
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );
