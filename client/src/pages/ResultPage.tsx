@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react'
-import { useParams } from 'react-router';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router";
+import { Nav } from "../components/Nav";
 
 export interface Results {
   id: string;
   userName: string;
-  quizId: string;
+  quizName: string;
   score: number;
 }
 
@@ -25,15 +26,17 @@ const ResultPage = () => {
   }, [user]);
 
   return (
-    <div>
+    <div className="container">
+      <Nav />
       {results.map((result) => (
         <div key={result.id}>
-          <div>{result.quizId}</div>
-          <div>{result.score}</div>
+          <div>
+            {result.quizName} : {result.score} points
+          </div>
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default ResultPage
+export default ResultPage;

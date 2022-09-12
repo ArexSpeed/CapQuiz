@@ -12,14 +12,6 @@ export class QuizController {
   getOneQuiz(@Param('categoryName') categoryName: string) {
     return this.quizService.getOneQuiz(categoryName);
   }
-  @Post('/score')
-  addScore(
-    @Body('userName') userName: string,
-    @Body('quizId') quizId: string,
-    @Body('score') score: number,
-  ) {
-    return this.quizService.saveScore(userName, quizId, score);
-  }
   @Post('/')
   addQuiz(
     @Body('category') category: string,
@@ -39,5 +31,13 @@ export class QuizController {
       ans4,
       correct,
     );
+  }
+  @Post('/score')
+  addScore(
+    @Body('userName') userName: string,
+    @Body('quizName') quizName: string,
+    @Body('score') score: number,
+  ) {
+    return this.quizService.saveScore(userName, quizName, score);
   }
 }

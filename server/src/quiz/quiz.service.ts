@@ -33,21 +33,8 @@ export class QuizService {
     ans4: string,
     correct: number,
   ) {
-    // const category = {
-    //   id: '',
-    //   name: '',
-    // };
-    // const findCategory = this.quizCategories.find(
-    //   (cat) => cat.name === categoryName,
-    // );
-    // if (!findCategory) {
-    //   category.id = (Math.random() * 100000).toString();
-    //   category.name = categoryName;
-    // } else {
-    //   category.id = findCategory.id;
-    //   category.name = findCategory.name;
-    // }
     const isCategoryNew = this.checkCategory(categoryName);
+    console.log('Answers:', ans1, ans2, ans3, ans4);
     const answers = this.addAnswers([ans1, ans2, ans3, ans4], correct);
 
     if (isCategoryNew.isNew) {
@@ -100,18 +87,19 @@ export class QuizService {
 
   addAnswers(answers: string[], correct: number) {
     const newAnswers = [];
-    answers.map((a, i) =>
+    console.log({ answers });
+    answers.map((answer, i) =>
       newAnswers.push({
         id: (Math.random() * 100000).toString(),
-        content: a,
+        content: answer,
         correct: correct - 1 === i,
       }),
     );
 
     return newAnswers;
   }
-  saveScore(userName: string, quizId: string, score: number) {
-    if (!userName || !quizId || !score) {
+  saveScore(userName: string, quizName: string, score: number) {
+    if (!userName || !quizName || !score) {
       return {
         isSuccess: false,
         message: 'Something went wrong',
@@ -121,7 +109,7 @@ export class QuizService {
     const newScore = {
       id: id.toString(),
       userName,
-      quizId,
+      quizName,
       score,
     };
     this.results.push(newScore);

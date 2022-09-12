@@ -16,11 +16,12 @@ export class ResultsService {
     return userResults;
   }
   async addResult(result: AddResultDto): Promise<AddResultsResponse> {
-    const score = await this.checkScore(result.answers, result.quizId);
+    const score = await this.checkScore(result.answers, result.quizName);
     const id = Math.random() * 100000;
     const newResult = {
       id: id.toString(),
-      ...result,
+      userName: result.userName,
+      quizName: result.quizName,
       score,
     };
     this.results.push(newResult);
@@ -35,9 +36,9 @@ export class ResultsService {
       id: string;
       content: string;
     }>,
-    quizId: string,
+    quizCategory: string,
   ) {
-    const quiz = this.quizzes.find((quiz) => quiz.id === quizId);
+    const quiz = this.quizzes.find((quiz) => quiz.category === quizCategory);
     const getAnswers = quiz.questions.map((q) => q.answers);
     let score = 0;
     console.log({ getAnswers });

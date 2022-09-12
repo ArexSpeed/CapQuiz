@@ -45,10 +45,10 @@ const AddQuestionPage = () => {
     const payload = {
       category: form.get("category"),
       question: form.get("question"),
-      ans1: form.get("ans1"),
-      ans2: form.get("ans2"),
-      ans3: form.get("ans3"),
-      ans4: form.get("ans4"),
+      answer1: form.get("ans1"),
+      answer2: form.get("ans2"),
+      answer3: form.get("ans3"),
+      answer4: form.get("ans4"),
       correct: form.get("correct"),
     };
 

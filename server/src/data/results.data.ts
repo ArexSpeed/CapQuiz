@@ -4,25 +4,25 @@ export const resultsData: Results[] = [
   {
     id: '1',
     userName: 'Arek',
-    quizId: '1',
+    quizName: 'React',
     score: 4,
   },
   {
     id: '2',
     userName: 'Arek',
-    quizId: '2',
+    quizName: 'Angular',
     score: 3,
   },
   {
     id: '3',
     userName: 'Chris',
-    quizId: '3',
+    quizName: 'Vue',
     score: 3,
   },
   {
     id: '4',
     userName: 'Chris',
-    quizId: '4',
+    quizName: 'React',
     score: 3,
   },
 ];

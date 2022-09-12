@@ -1,7 +1,7 @@
 export interface Results {
   id: string;
   userName: string;
-  quizId: string;
+  quizName: string;
   score: number;
 }
 

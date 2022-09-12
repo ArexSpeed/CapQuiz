@@ -6,7 +6,7 @@ export class AddResultDto {
   userName: string;
   @IsString()
   @IsNotEmpty()
-  quizId: string;
+  quizName: string;
   @IsArray()
   answers: Array<{
     id: string;
