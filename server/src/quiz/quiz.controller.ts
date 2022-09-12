@@ -20,4 +20,24 @@ export class QuizController {
   ) {
     return this.quizService.saveScore(userName, quizId, score);
   }
+  @Post('/')
+  addQuiz(
+    @Body('category') category: string,
+    @Body('question') question: string,
+    @Body('answer1') ans1: string,
+    @Body('answer2') ans2: string,
+    @Body('answer3') ans3: string,
+    @Body('answer4') ans4: string,
+    @Body('correct') correct: number,
+  ) {
+    return this.quizService.addQuestions(
+      category,
+      question,
+      ans1,
+      ans2,
+      ans3,
+      ans4,
+      correct,
+    );
+  }
 }

@@ -12,6 +12,10 @@ export class UsersController {
   getOneUser(@Param('id') userId: string) {
     return this.usersService.getOneUser(userId);
   }
+  @Get('/role/:id')
+  getUserRole(@Param('id') userId: string) {
+    return this.usersService.getUserRole(userId);
+  }
   // @Get('/login')
   // signinUser()
 }
