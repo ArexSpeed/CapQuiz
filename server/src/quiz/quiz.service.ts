@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { finishedQuizData } from '../data/finishedQuiz.data';
-import { FinishedQuiz } from '../interfaces/finishedQuiz.interface';
+import { resultsData } from '../data/results.data';
+import { Results } from '../interfaces/results.interface';
 import { categories, quizData } from '../data/quiz.data';
 import { Category, Quiz } from '../interfaces/quiz.interface';
 
@@ -8,7 +8,7 @@ import { Category, Quiz } from '../interfaces/quiz.interface';
 export class QuizService {
   private quizzes: Quiz[] = quizData;
   private quizCategories: Category[] = categories;
-  private finishData: FinishedQuiz[] = finishedQuizData;
+  private results: Results[] = resultsData;
   getCategories(): Category[] {
     return this.quizCategories;
   }
@@ -32,7 +32,7 @@ export class QuizService {
       quizId,
       score,
     };
-    this.finishData.push(newScore);
+    this.results.push(newScore);
     return {
       isSuccess: true,
       message: 'Your score is saved',

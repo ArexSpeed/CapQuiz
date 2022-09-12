@@ -1,6 +1,6 @@
-import { FinishedQuiz } from '../interfaces/finishedQuiz.interface';
+import { Results } from '../interfaces/results.interface';
 
-export const finishedQuizData: FinishedQuiz[] = [
+export const resultsData: Results[] = [
   {
     id: '1',
     userName: 'Arek',

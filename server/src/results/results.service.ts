@@ -1,14 +1,55 @@
 import { Injectable } from '@nestjs/common';
-import { finishedQuizData } from 'src/data/finishedQuiz.data';
-import { FinishedQuiz } from 'src/interfaces/finishedQuiz.interface';
+import { quizData } from 'src/data/quiz.data';
+import { Quiz } from 'src/interfaces/quiz.interface';
+import { resultsData } from '../data/results.data';
+import { AddResultsResponse, Results } from '../interfaces/results.interface';
+import { AddResultDto } from './dto/add-result.dto';
 
 @Injectable()
 export class ResultsService {
-  private results: FinishedQuiz[] = finishedQuizData;
-  getUserResults(userName: string): FinishedQuiz[] {
+  private results: Results[] = resultsData;
+  private quizzes: Quiz[] = quizData;
+  getUserResults(userName: string): Results[] {
     const userResults = this.results.filter(
       (result) => result.userName === userName,
     );
     return userResults;
+  }
+  async addResult(result: AddResultDto): Promise<AddResultsResponse> {
+    const score = await this.checkScore(result.answers, result.quizId);
+    const id = Math.random() * 100000;
+    const newResult = {
+      id: id.toString(),
+      ...result,
+      score,
+    };
+    this.results.push(newResult);
+    return {
+      isSuccess: true,
+      score,
+    };
+  }
+
+  checkScore(
+    answers: Array<{
+      id: string;
+      content: string;
+    }>,
+    quizId: string,
+  ) {
+    const quiz = this.quizzes.find((quiz) => quiz.id === quizId);
+    const getAnswers = quiz.questions.map((q) => q.answers);
+    let score = 0;
+    console.log({ getAnswers });
+    console.log({ answers });
+    for (let i = 0; i < answers.length; i++) {
+      console.log('for', i);
+      const findAnswer = getAnswers[i].find(
+        (answer) => answer.id === answers[i].id,
+      );
+      console.log({ findAnswer });
+      if (findAnswer.correct) score++;
+    }
+    return score;
   }
 }
