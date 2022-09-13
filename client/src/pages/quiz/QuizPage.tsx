@@ -21,12 +21,12 @@ export interface Quiz {
 }
 
 const QuizPage = () => {
-  const { selectedQuiz } = useContext(UserContext);
+  const { selectedQuiz, selectedAnswers, addAnswer } = useContext(UserContext);
   const [quiz, setQuiz] = useState<Quiz>();
   const [questions, setQuestions] = useState<Questions[]>([]);
   const [searchParams] = useSearchParams();
   const [qNo, setQNo] = useState(1);
-  const [selectedAnswers, setSelectedAnswers] = useState<Answers[]>([]);
+  //const [selectedAnswers, setSelectedAnswers] = useState<Answers[]>([]);
 
   console.log(searchParams.get("question"));
 
@@ -47,29 +47,30 @@ const QuizPage = () => {
     if (quiz) setQuestions(quiz?.questions);
   }, [quiz]);
 
-  const selectAnswer = (answer: Answers) => {
-    setSelectedAnswers((prev) => [...prev, answer])
-  }
   return (
     <div className="container">
-      <h3 style={{ margin: '16px'}}>
+      <h3 style={{ margin: "16px" }}>
         {qNo}. {questions[qNo - 1]?.question}
       </h3>
       <div className="answersContainer">
         {questions[qNo - 1]?.answers.map((answer) => (
-          <button 
-            key={answer.id} 
-            className={`answerButton ${selectedAnswers.find((a) => a.id === answer.id) && 'selected'}`} 
-            onClick={() => selectAnswer(answer)}
+          <button
+            key={answer.id}
+            className={`answerButton ${
+              selectedAnswers.find((a) => a.id === answer.id) && "selected"
+            }`}
+            onClick={() => addAnswer(answer, qNo)}
           >
-              {answer.content}
+            {answer.content}
           </button>
         ))}
       </div>
       <div>
-      <button onClick={() => setQNo((prev) => prev - 1)}>Prev</button>
-      {qNo >= 5 &&  <Link to="/quiz/result">Finish</Link>}
-      {qNo < 5 && <button onClick={() => setQNo((prev) => prev + 1)}>Next</button>}
+        <button onClick={() => setQNo((prev) => prev - 1)}>Prev</button>
+        {qNo >= 5 && <Link to="/quiz/result">Finish</Link>}
+        {qNo < 5 && (
+          <button onClick={() => setQNo((prev) => prev + 1)}>Next</button>
+        )}
       </div>
     </div>
   );
