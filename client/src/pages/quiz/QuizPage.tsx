@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
 export type Answers = {
@@ -24,11 +24,7 @@ const QuizPage = () => {
   const { selectedQuiz, selectedAnswers, addAnswer } = useContext(UserContext);
   const [quiz, setQuiz] = useState<Quiz>();
   const [questions, setQuestions] = useState<Questions[]>([]);
-  const [searchParams] = useSearchParams();
   const [qNo, setQNo] = useState(1);
-  //const [selectedAnswers, setSelectedAnswers] = useState<Answers[]>([]);
-
-  console.log(searchParams.get("question"));
 
   useEffect(() => {
     const fetchResults = async () => {

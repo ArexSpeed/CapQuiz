@@ -46,13 +46,19 @@ const CategoryListPage = () => {
   };
 
   return !toDelete.id ? (
-    <div>
+    <div className="container">
       <Nav />
-      <Link to="/categories/add">Add new</Link>
+      <Link to="/categories/add" className="addButton">
+        Add new
+      </Link>
       {categories?.map((category) => (
-        <div key={category.id}>
-          <Link to={`/categories/edit/${category.id}`}>{category.name}</Link>
+        <div key={category.id} className="row">
+          <h3>{category.name}</h3>
+          <Link to={`/categories/edit/${category.id}`} className="editButton">
+            Edit
+          </Link>
           <button
+            className="deleteButton"
             onClick={() =>
               setToDelete({
                 id: category.id,
@@ -66,7 +72,7 @@ const CategoryListPage = () => {
       ))}
     </div>
   ) : (
-    <div>
+    <div className="container">
       <p>Are you sure to delete {toDelete.name}</p>
       <button onClick={deleteCategory}>Yes</button>
       <button

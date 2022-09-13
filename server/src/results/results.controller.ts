@@ -20,4 +20,9 @@ export class ResultsController {
     //console.log({ result });
     return this.resultsService.addResult(result);
   }
+  // @Post('/')
+  // addNewResult(@Body() result) {
+  //   //console.log({ result });
+  //   return this.resultsService.addResult(result);
+  // }
 }
