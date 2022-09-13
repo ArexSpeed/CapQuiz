@@ -1,5 +1,5 @@
 // eslint-disable-next-line prettier/prettier
-import { Body, Controller, Delete, Get, Inject, Param, Patch, Post, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Param, Patch, Post, Query, Req } from '@nestjs/common';
 import { Request } from 'express';
 import { CategoriesService } from './categories.service';
 
@@ -12,6 +12,16 @@ export class CategoriesController {
   getAllCategories() {
     return this.categoriesService.getCategories();
   }
+  // @Get('/')
+  // getAllCategories(@Query() query: string) {
+  //   console.log({ query });
+  //   return this.categoriesService.getOneCategory(query);
+  // }
+  // @Get('/')
+  // getAllCategories(@Query('id') id: string) {
+  //   console.log({ id });
+  //   return this.categoriesService.getOneCategory(id);
+  // }
   @Get('/:id')
   getOneCategories(@Param('id') id: string) {
     return this.categoriesService.getOneCategory(id);

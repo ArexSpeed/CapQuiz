@@ -9,6 +9,7 @@ export class CategoriesService {
     return this.quizCategories;
   }
   getOneCategory(id: string): Category {
+    console.log(id, 'service');
     return this.quizCategories.find((category) => category.id === id);
   }
   addCategory(name: string) {
